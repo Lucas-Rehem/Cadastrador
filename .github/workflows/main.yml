@@ -1,0 +1,32 @@
+name: Gerar aplicativo macOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Baixar projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar PyInstaller
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Criar aplicativo
+        run: |
+          pyinstaller --windowed --name Cadastrador Cadastrador.py
+
+      - name: Guardar aplicativo
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cadastrador-macOS
+          path: dist/Cadastrador.app
