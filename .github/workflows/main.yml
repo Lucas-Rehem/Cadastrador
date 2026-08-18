@@ -25,8 +25,13 @@ jobs:
         run: |
           pyinstaller --windowed --name Cadastrador Cadastrador.py
 
-      - name: Guardar aplicativo
+      - name: Compactar aplicativo
+        run: |
+          cd dist
+          zip -r Cadastrador-macOS.zip Cadastrador.app
+
+      - name: Salvar aplicativo
         uses: actions/upload-artifact@v4
         with:
           name: Cadastrador-macOS
-          path: dist/Cadastrador.app
+          path: dist/Cadastrador-macOS.zip
